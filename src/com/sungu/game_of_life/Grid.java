@@ -31,7 +31,7 @@ public class Grid {
 
 
     /**
-     * Get one Cell from target
+     * Get one cell from target
      * @param from Target map
      * @param x X coordinate that not consider padding
      * @param y Y coordinate that not consider padding
@@ -69,7 +69,7 @@ public class Grid {
     }
 
     /**
-     * Get one coordinate's survival or not.
+     * Get one coordinate's survival or not in next generation.
      * @param x X coordinate that not consider padding
      * @param y Y coordinate that not consider padding
      * @return survival or not
