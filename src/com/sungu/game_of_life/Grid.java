@@ -75,8 +75,6 @@ public class Grid {
      * @return survival or not
      */
     private boolean nextGenerationOne(int x, int y) {
-//        if(x == 4 && y == 4)
-//            System.out.println("");
         final int neighborCount = CountNeighborCell(x, y);
         final boolean alive = getCell(map, x, y).isAlive();
 
