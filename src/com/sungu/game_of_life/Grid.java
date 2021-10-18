@@ -55,7 +55,7 @@ public class Grid {
      * Get neighbor cell count.
      * @param x X coordinate that not consider padding
      * @param y Y coordinate that not consider padding
-     * @return 인접 세포 수
+     * @return neighbor cell count
      */
     private int CountNeighborCell(int x, int y) {
         int sum = 0;
