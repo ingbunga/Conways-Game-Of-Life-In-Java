@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"com.sungu.game_of_life","l":"Cell"},{"p":"com.sungu.game_of_life","l":"Grid"},{"p":"com.sungu.console","l":"Main"}]
