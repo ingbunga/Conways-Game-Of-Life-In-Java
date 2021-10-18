@@ -25,6 +25,10 @@ public class Cell {
         alive = false;
     }
 
+    public int toNumber() {
+        return alive ? 1 : 0;
+    }
+
     public boolean isAlive() {
         return alive;
     }

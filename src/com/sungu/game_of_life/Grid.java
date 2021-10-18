@@ -9,6 +9,7 @@ public class Grid {
     private int width;
     private Cell[][] map;
     private Cell[][] tempMap;
+    private int[][] prefixSum;
 
     /**
      * @param h Height that not consider padding
@@ -19,6 +20,7 @@ public class Grid {
         width  = w;
         map     = new Cell[h+2][w+2];
         tempMap = new Cell[h+2][w+2];
+        prefixSum = new int[h+3][w+3];
 
         // 2d maps initialize
         for (int y = 0; y < h + 2; y++) {
@@ -51,32 +53,42 @@ public class Grid {
         this.map     = tmp;
     }
 
+
+    /**
+     * update prefix sum from map
+     */
+    private void updatePrefixSum() {
+        for (int y = 2; y <= height + 1; y++) {
+            for (int x = 2; x <= width + 1; x++) {
+                prefixSum[y][x] =
+                        prefixSum[y][x-1] + prefixSum[y-1][x] - prefixSum[y-1][x-1] + map[y-1][x-1].toNumber();
+            }
+        }
+    }
+
     /**
      * Get neighbor cell count.
-     * @param x X coordinate that not consider padding
-     * @param y Y coordinate that not consider padding
+     * @param x X coordinate
+     * @param y Y coordinate
      * @return neighbor cell count
      */
     private int CountNeighborCell(int x, int y) {
-        int sum = 0;
-
-        for (int i = y - 1; i <= y + 1; i++)
-            for (int j = x - 1; j <= x + 1; j++)
-                if (!(j == x && i == y))
-                    sum += getCell(map, j, i).isAlive() ? 1 : 0;
-
-        return sum;
+        return prefixSum[y + 2][x + 2]
+                - prefixSum[y + 2][x - 1]
+                - prefixSum[y - 1][x + 2]
+                + prefixSum[y - 1][x - 1]
+                - map[y][x].toNumber();
     }
 
     /**
      * Get one coordinate's survival or not in next generation.
-     * @param x X coordinate that not consider padding
-     * @param y Y coordinate that not consider padding
+     * @param x X coordinate
+     * @param y Y coordinate
      * @return survival or not
      */
     private boolean nextGenerationOne(int x, int y) {
         final int neighborCount = CountNeighborCell(x, y);
-        final boolean alive = getCell(map, x, y).isAlive();
+        final boolean alive = map[y][x].isAlive();
 
         return neighborCount == 3 || (alive && neighborCount == 2);
     }
@@ -86,12 +98,14 @@ public class Grid {
      * Change map to next generation.
      */
     public void nextGeneration() {
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        updatePrefixSum();
+
+        for (int y = 1; y <= height; y++) {
+            for (int x = 1; x <= width; x++) {
                 if (nextGenerationOne(x, y))
-                    getCell(tempMap, x, y).setLive();
+                    tempMap[y][x].setLive();
                 else
-                    getCell(tempMap, x, y).setDead();
+                    tempMap[y][x].setDead();
             }
         }
 
@@ -109,11 +123,11 @@ public class Grid {
         final int loadingH = loadingMap.length;
         final int loadingW = loadingMap[0].length;
 
-        for (int y = 0; y < loadingH; y++) {
-            for (int x = 0; x < loadingW; x++) {
-                final Cell cell = getCell(map, startX + x, startY + y);
+        for (int y = 1; y <= loadingH; y++) {
+            for (int x = 1; x <= loadingW; x++) {
+                final Cell cell = map[startY + y][startX + x];
 
-                if (loadingMap[y][x])
+                if (loadingMap[y - 1][x - 1])
                     cell.setLive();
                 else
                     cell.setDead();
@@ -133,9 +147,9 @@ public class Grid {
     public boolean[][] saveMap() {
         var result = new boolean[height][width];
 
-        for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
-                result[y][x] = getCell(map, x, y).isAlive();
+        for (int y = 1; y <= height; y++)
+            for (int x = 1; x <= width; x++)
+                result[y][x] = map[y][x].isAlive();
 
         return result;
     }
