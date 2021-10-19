@@ -3,7 +3,7 @@ package com.sungu.console;
 import com.sungu.game_of_life.*;
 
 public class Main {
-    public static String grid2String(Grid grid) {
+    public static String grid2String(Board2D grid) {
         String result = "";
         final Cell[][] map = grid.getMap();
 
@@ -21,7 +21,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-	    var grid = new Grid(11, 11);
+	    var grid = new Board2D(11, 51);
 
         final boolean X = false;
         final boolean O = true;
@@ -31,10 +31,10 @@ public class Main {
                 {X, X, X, X, X, X, X},
                 {X, X, X, X, X, X, X},
                 {X, X, X, X, X, X, X},
+                {X, X, X, O, X, X, X},
+                {X, X, O, O, O, X, X},
                 {X, X, X, X, X, X, X},
-                {X, X, X, X, X, O, X},
-                {X, X, X, X, O, O, O},
-                {X, X, X, X, X, O, X},
+                {X, X, X, X, X, X, X},
         };
 
         grid.loadMap(map);

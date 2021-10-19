@@ -3,7 +3,7 @@ package com.sungu.game_of_life;
 /**
  * Abstract Conway's game of life Board
  */
-public class Grid {
+public class Board2D {
 
     private int height;
     private int width;
@@ -14,7 +14,7 @@ public class Grid {
      * @param h Height that not consider padding
      * @param w Width that not consider padding
      */
-    public Grid(int h, int w) {
+    public Board2D(int h, int w) {
         height = h;
         width  = w;
         map     = new Cell[h+2][w+2];
