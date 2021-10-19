@@ -39,9 +39,20 @@ public class Main {
 
         grid.loadMap(map);
 
-        for (int i = 0; i < 10; i++) {
+
+        long startTime = System.currentTimeMillis();
+
+        for (int i = 0; i < 100; i++) {
             System.out.println(Main.grid2String(grid));
             grid.nextGeneration();
         }
+
+        // End
+        long endTime = System.currentTimeMillis();
+
+        // Result
+        long Result_Time = endTime - startTime;
+        System.out.println("Result : " + Result_Time + "(ms)");
+
     }
 }

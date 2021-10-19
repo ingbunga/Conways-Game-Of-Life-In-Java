@@ -9,7 +9,6 @@ public class Grid {
     private int width;
     private Cell[][] map;
     private Cell[][] tempMap;
-    private long[][] prefixSum;
 
     /**
      * @param h Height that not consider padding
@@ -20,7 +19,6 @@ public class Grid {
         width  = w;
         map     = new Cell[h+2][w+2];
         tempMap = new Cell[h+2][w+2];
-        prefixSum = new long[h+3][w+3];
 
         // 2d maps initialize
         for (int y = 0; y < h + 2; y++) {
@@ -55,30 +53,17 @@ public class Grid {
 
 
     /**
-     * update prefix sum from map
-     */
-    private void updatePrefixSum() {
-        for (int y = 2; y <= height + 1; y++) {
-            for (int x = 2; x <= width + 1; x++) {
-                prefixSum[y][x] =
-                        prefixSum[y][x-1] + prefixSum[y-1][x] - prefixSum[y-1][x-1] + map[y-1][x-1].toNumber();
-            }
-        }
-    }
-
-    /**
      * Get neighbor cell count.
      * @param x X coordinate
      * @param y Y coordinate
      * @return neighbor cell count
      */
     private long CountNeighborCell(int x, int y) {
-        return prefixSum[y + 2][x + 2]
-                - prefixSum[y + 2][x - 1]
-                - prefixSum[y - 1][x + 2]
-                + prefixSum[y - 1][x - 1]
-                - map[y][x].toNumber();
+        return    map[y - 1][x - 1].toNumber() + map[y - 1][x].toNumber() + map[y - 1][x + 1].toNumber()
+                + map[y][x - 1].toNumber()     - map[y][x].toNumber()     + map[y][x + 1].toNumber()
+                + map[y + 1][x - 1].toNumber() + map[y + 1][x].toNumber() + map[y + 1][x + 1].toNumber();
     }
+
 
     /**
      * Get one coordinate's survival or not in next generation.
@@ -98,8 +83,6 @@ public class Grid {
      * Change map to next generation.
      */
     public void nextGeneration() {
-        updatePrefixSum();
-
         for (int y = 1; y <= height; y++) {
             for (int x = 1; x <= width; x++) {
                 if (nextGenerationOne(x, y))
@@ -163,6 +146,7 @@ public class Grid {
         return map;
     }
 
+
     /**
      * Getter of height
      * @return height
@@ -170,6 +154,7 @@ public class Grid {
     public int getHeight() {
         return height;
     }
+
 
     /**
      * Getter of width
