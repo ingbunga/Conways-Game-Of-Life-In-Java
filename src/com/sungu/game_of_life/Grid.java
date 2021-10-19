@@ -163,17 +163,4 @@ public class Grid {
     public int getWidth() {
         return width;
     }
-
-
-    /**
-     * Deep copy self.
-     * ** HIGH COST **
-     * @return deep copied Grid
-     */
-    public Grid clone() {
-        Grid result = new Grid(height, width);
-        result.loadMap(saveMap());
-
-        return result;
-    }
 }
