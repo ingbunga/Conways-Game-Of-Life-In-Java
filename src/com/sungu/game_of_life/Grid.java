@@ -9,7 +9,7 @@ public class Grid {
     private int width;
     private Cell[][] map;
     private Cell[][] tempMap;
-    private int[][] prefixSum;
+    private long[][] prefixSum;
 
     /**
      * @param h Height that not consider padding
@@ -20,7 +20,7 @@ public class Grid {
         width  = w;
         map     = new Cell[h+2][w+2];
         tempMap = new Cell[h+2][w+2];
-        prefixSum = new int[h+3][w+3];
+        prefixSum = new long[h+3][w+3];
 
         // 2d maps initialize
         for (int y = 0; y < h + 2; y++) {
@@ -72,7 +72,7 @@ public class Grid {
      * @param y Y coordinate
      * @return neighbor cell count
      */
-    private int CountNeighborCell(int x, int y) {
+    private long CountNeighborCell(int x, int y) {
         return prefixSum[y + 2][x + 2]
                 - prefixSum[y + 2][x - 1]
                 - prefixSum[y - 1][x + 2]
@@ -87,7 +87,7 @@ public class Grid {
      * @return survival or not
      */
     private boolean nextGenerationOne(int x, int y) {
-        final int neighborCount = CountNeighborCell(x, y);
+        final long neighborCount = CountNeighborCell(x, y);
         final boolean alive = map[y][x].isAlive();
 
         return neighborCount == 3 || (alive && neighborCount == 2);
