@@ -60,7 +60,7 @@ public class Grid {
      */
     private long CountNeighborCell(int x, int y) {
         return    map[y - 1][x - 1].toNumber() + map[y - 1][x].toNumber() + map[y - 1][x + 1].toNumber()
-                + map[y][x - 1].toNumber()     - map[y][x].toNumber()     + map[y][x + 1].toNumber()
+                + map[y][x - 1].toNumber()                                + map[y][x + 1].toNumber()
                 + map[y + 1][x - 1].toNumber() + map[y + 1][x].toNumber() + map[y + 1][x + 1].toNumber();
     }
 
