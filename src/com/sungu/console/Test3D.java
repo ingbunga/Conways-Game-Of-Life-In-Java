@@ -5,20 +5,24 @@ import com.sungu.game_of_life.Cell;
 
 public class Test3D {
     public static String board3dToString(Board3D grid) {
-        String result = "";
+        String result = "vec![ ";
         final Cell[][][] map = grid.getMap();
 
         final int xSize = grid.getXSize();
         final int ySize = grid.getYSize();
-//        final int zSize = grid.getZSize();
+        final int zSize = grid.getZSize();
 
-        for (int y = 0; y < ySize; y++) {
-            for (int x = 0; x < xSize; x++) {
-                result += grid.getCell(map, x, y, 3).isAlive() ? 'O' : '.';
+
+        for (int z = 0; z < zSize; z++) {
+            for (int y = 0; y < ySize; y++) {
+                for (int x = 0; x < xSize; x++) {
+                    result += grid.getCell(map, x, y, z).isAlive()
+                                  ? "(" + x + ", " + y + ", " + z + "), "
+                                  : "";
+                }
             }
-            result += '\n';
         }
-        result += "\n\n\n";
+
 
         return result;
     }

@@ -2,7 +2,7 @@ package com.sungu.console;
 
 import com.sungu.game_of_life.*;
 
-public class Main {
+public class Test2D {
     public static String grid2String(Board2D grid) {
         String result = "";
         final Cell[][] map = grid.getMap();
@@ -31,10 +31,10 @@ public class Main {
                 {X, X, X, X, X, X, X},
                 {X, X, X, X, X, X, X},
                 {X, X, X, X, X, X, X},
-                {X, X, X, O, X, X, X},
-                {X, X, O, O, O, X, X},
-                {X, X, X, O, X, X, X},
                 {X, X, X, X, X, X, X},
+                {X, X, X, X, X, O, X},
+                {X, X, X, X, O, O, O},
+                {X, X, X, X, X, O, X},
         };
 
         grid.loadMap(map);
@@ -43,7 +43,7 @@ public class Main {
         long startTime = System.currentTimeMillis();
 
         for (int i = 0; i < 100; i++) {
-            System.out.println(Main.grid2String(grid));
+            System.out.println(Test2D.grid2String(grid));
             grid.nextGeneration();
         }
 
