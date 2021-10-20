@@ -3,7 +3,7 @@ package com.sungu.game_of_life.rbt;
 import java.util.TreeSet;
 
 /**
- * Abstract Conway's game of life Board in 3D
+ * Abstract Conway's game of life Board in 3D with Red Black Tree
  */
 public class Board3D {
 
@@ -35,6 +35,13 @@ public class Board3D {
 //        return from[z + 1][y + 1][x + 1];
 //    }
 
+    /**
+     * return ture if any cell is located in coordinate
+     * @param x X coordinate that not consider padding
+     * @param y Y coordinate that not consider padding
+     * @param z Z coordinate that not consider padding
+     * @return is located
+     */
     public boolean hasCell(int x, int y, int z) {
         return map.contains(new Cell(x + 1, y + 1, z + 1));
     }
@@ -153,16 +160,18 @@ public class Board3D {
      * Export map as 3d boolean
      * @return 3d boolean map
      */
-//    public boolean[][][] saveMap() {
-//        var result = new boolean[zSize][ySize][xSize];
-//
-//        for (int z = 1; z <= zSize; z++)
-//            for (int y = 1; y <= ySize; y++)
-//                for (int x = 1; x <= xSize; x++)
-//                    result[z - 1][y - 1][x - 1] = map[z][y][x].isAlive();
-//
-//        return result;
-//    }
+    public boolean[][][] saveMap() {
+        var result = new boolean[zSize][ySize][xSize];
+
+        for (Cell e : map) {
+            int x = e.getXPos() - 1;
+            int y = e.getYPos() - 1;
+            int z = e.getZPos() - 1;
+            result[z][y][x] = hasCell(z, y, x);
+        }
+
+        return result;
+    }
 
 
     /**
