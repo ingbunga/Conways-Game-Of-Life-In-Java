@@ -4,6 +4,7 @@ import java.util.TreeSet;
 
 /**
  * Abstract Conway's game of life Board in 3D with Red Black Tree
+ * no padding
  */
 public class Board3D {
 
@@ -13,9 +14,9 @@ public class Board3D {
     private boolean[] liveToLiveWhen, deadToLiveWhen;
 
     /**
-     * @param xSize xSize that not consider padding
-     * @param ySize ySize that not consider padding
-     * @param zSize zSize that not consider padding
+     * @param xSize xSize
+     * @param ySize ySize
+     * @param zSize zSize
      */
     public Board3D(int xSize, int ySize, int zSize) {
         this.xSize = xSize;
@@ -30,20 +31,15 @@ public class Board3D {
 
     }
 
-
-//    public Cell getCell(Cell[][][] from, int x, int y, int z) {
-//        return from[z + 1][y + 1][x + 1];
-//    }
-
     /**
      * return ture if any cell is located in coordinate
-     * @param x X coordinate that not consider padding
-     * @param y Y coordinate that not consider padding
-     * @param z Z coordinate that not consider padding
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @param z Z coordinate
      * @return is located
      */
     public boolean hasCell(int x, int y, int z) {
-        return map.contains(new Cell(x + 1, y + 1, z + 1));
+        return map.contains(new Cell(x, y, z));
     }
 
 
@@ -138,10 +134,10 @@ public class Board3D {
         final int loadingY = loadingMap[0].length;
         final int loadingX = loadingMap[0][0].length;
 
-        for (int z = 1; z <= loadingZ; z++) {
-            for (int y = 1; y <= loadingY; y++) {
-                for (int x = 1; x <= loadingX; x++) {
-                    if (loadingMap[z - 1][y - 1][x - 1]) {
+        for (int z = 0; z < loadingZ; z++) {
+            for (int y = 0; y < loadingY; y++) {
+                for (int x = 0; x < loadingX; x++) {
+                    if (loadingMap[z][y][x]) {
                         final Cell cell = new Cell(startX + x, startY + y, startZ + z);
 
                         map.add(cell);
@@ -164,10 +160,10 @@ public class Board3D {
         var result = new boolean[zSize][ySize][xSize];
 
         for (Cell e : map) {
-            int x = e.getXPos() - 1;
-            int y = e.getYPos() - 1;
-            int z = e.getZPos() - 1;
-            result[z][y][x] = hasCell(z, y, x);
+            int x = e.getXPos();
+            int y = e.getYPos();
+            int z = e.getZPos();
+            result[z][y][x] = true;
         }
 
         return result;
