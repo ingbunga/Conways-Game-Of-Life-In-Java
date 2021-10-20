@@ -1,7 +1,7 @@
 package com.sungu.game_of_life;
 
 /**
- * Abstract Conway's game of life Board
+ * Abstract Conway's game of life Board in 3D
  */
 public class Board3D {
 
@@ -10,8 +10,9 @@ public class Board3D {
     private boolean[] liveToLiveWhen, deadToLiveWhen;
 
     /**
-     * @param h Height that not consider padding
-     * @param w Width that not consider padding
+     * @param xSize xSize that not consider padding
+     * @param ySize ySize that not consider padding
+     * @param zSize zSize that not consider padding
      */
     public Board3D(int xSize, int ySize, int zSize) {
         this.xSize = xSize;
@@ -40,6 +41,7 @@ public class Board3D {
      * @param from Target map
      * @param x X coordinate that not consider padding
      * @param y Y coordinate that not consider padding
+     * @param z Z coordinate that not consider padding
      * @return Cell that locate
      */
     public Cell getCell(Cell[][][] from, int x, int y, int z) {
@@ -83,6 +85,7 @@ public class Board3D {
      * Get one coordinate's survival or not in next generation.
      * @param x X coordinate
      * @param y Y coordinate
+     * @param z Z coordinate
      * @return survival or not
      */
     private boolean nextGenerationOne(int x, int y, int z) {
@@ -113,7 +116,7 @@ public class Board3D {
 
 
     /**
-     * Import map as 2d boolean
+     * Import map as 3d boolean
      * @param loadingMap map
      * @param startX start x coordinate  (default : 0)
      * @param startY start y coordinate  (default : 0)
@@ -144,8 +147,8 @@ public class Board3D {
 
 
     /**
-     * Export map as 2d boolean
-     * @return 2d boolean map
+     * Export map as 3d boolean
+     * @return 3d boolean map
      */
     public boolean[][][] saveMap() {
         var result = new boolean[zSize][ySize][xSize];
