@@ -6,29 +6,24 @@ public class TestRBT3D {
     public static String board3dToString(Board3D grid) {
         String result = "vec![ ";
 
-        final int xSize = grid.getXSize();
-        final int ySize = grid.getYSize();
-        final int zSize = grid.getZSize();
+        final int xSize = 51;
+        final int ySize = 51;
+        final int zSize = 51;
 
 
-        for (int z = 0; z < zSize; z++) {
-            for (int y = 0; y < ySize; y++) {
-                for (int x = 0; x < xSize; x++) {
-                    result += grid.hasCell(x, y, z)
-                            ? "(" + x + ", " + y + ", " + z + "), "
-                            : "";
-                }
-            }
+        final var map = grid.getMap();
+
+        for (var e : map) {
+            result += "(" + e.getXPos() + ", " + e.getYPos() + ", " + e.getZPos() + "), ";
         }
 
         result += "],";
-
 
         return result;
     }
 
     public static void main(String[] args) {
-        var board = new Board3D(51, 51, 51);
+        var board = new Board3D();
 
         final boolean X = false;
         final boolean O = true;

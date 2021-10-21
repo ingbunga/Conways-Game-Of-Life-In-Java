@@ -23,6 +23,8 @@ public class Test3D {
             }
         }
 
+        result += "],";
+
 
         return result;
     }

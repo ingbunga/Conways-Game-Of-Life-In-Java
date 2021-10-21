@@ -1,17 +1,17 @@
 package com.sungu.game_of_life.rbt;
 
-public class Cell implements Comparable<Cell> {
+public class Cell3D implements Comparable<Cell3D> {
 
     private int x;
     private int y;
     private int z;
 
 
-    public Cell(int x, int y, int z) {
+    public Cell3D(int x, int y, int z) {
         this.setPos(x, y, z);
     }
 
-    public Cell() {
+    public Cell3D() {
         this(0, 0, 0);
     }
 
@@ -36,15 +36,15 @@ public class Cell implements Comparable<Cell> {
     }
 
     @Override
-    public int compareTo(Cell o) {
-        if (this.x != o.x) {
-            return this.x - o.x;
+    public int compareTo(Cell3D o) {
+        if (this.z != o.z) {
+            return this.z - o.z;
         }
         if (this.y != o.y) {
             return this.y - o.y;
         }
-        if (this.z != o.z) {
-            return this.z - o.z;
+        if (this.x != o.x) {
+            return this.x - o.x;
         }
         return 0;
     }
