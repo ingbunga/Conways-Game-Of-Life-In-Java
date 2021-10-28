@@ -58,7 +58,7 @@ public class Board2D {
      * @param y Y coordinate
      * @return survival or not
      */
-    private boolean nextGenerationOne(int x, int y) {
+    protected boolean nextGenerationOne(int x, int y) {
         final long neighborCount = CountNeighborCell(x, y);
         final Cell2D cell = new Cell2D(x, y);
         final boolean alive = map.contains(cell);
