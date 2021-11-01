@@ -11,6 +11,7 @@ public class LimitedBoard2D extends Board2D{
         this.height = height;
     }
 
+    @Override
     protected boolean nextGenerationOne(int x, int y) {
         if (x >= width || x < 0 || y < 0 || y >= height) return false;
 
