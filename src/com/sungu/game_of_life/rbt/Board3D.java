@@ -3,7 +3,7 @@ package com.sungu.game_of_life.rbt;
 import java.util.TreeSet;
 
 /**
- * Abstract Conway's game of life Board in 3D with Red Black Tree
+ * Abstract Conway's game of life Board in 3D with Red Black Tree,
  * no padding
  */
 public class Board3D {
@@ -115,9 +115,9 @@ public class Board3D {
     /**
      * Import map as 3d boolean
      * @param loadingMap map
-     * @param startX start x coordinate  (default : 0)
-     * @param startY start y coordinate  (default : 0)
-     * @param startZ start z coordinate  (default : 0)
+     * @param startX start x coordinate
+     * @param startY start y coordinate
+     * @param startZ start z coordinate
      */
     public void loadMap(boolean[][][] loadingMap, int startX, int startY, int startZ) {
         final int loadingZ = loadingMap.length;
@@ -137,6 +137,11 @@ public class Board3D {
         }
     }
 
+
+    /**
+     * Import map as 3d boolean with start point (0, 0, 0)
+     * @param loadingMap map
+     */
     public void loadMap(boolean[][][] loadingMap) {
         loadMap(loadingMap, 0, 0, 0);
     }
@@ -144,6 +149,9 @@ public class Board3D {
 
     /**
      * Export map as 3d boolean
+     * @param xSize export X size
+     * @param ySize export Y size
+     * @param zSize export Z size
      * @return 3d boolean map
      */
     public boolean[][][] saveMap(int xSize, int ySize, int zSize) {
@@ -203,6 +211,10 @@ public class Board3D {
         }
     }
 
+    /**
+     * Getter of map
+     * @return map
+     */
     public TreeSet<Cell3D> getMap() {
         return map;
     }

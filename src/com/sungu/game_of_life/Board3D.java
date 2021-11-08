@@ -205,18 +205,34 @@ public class Board3D {
         }
     }
 
+    /**
+     * Getter of map
+     * @return map
+     */
     public Cell[][][] getMap() {
         return map;
     }
 
+    /**
+     * Getter of xSize
+     * @return xSize
+     */
     public int getXSize() {
         return xSize;
     }
 
+    /**
+     * Getter of ySize
+     * @return ySize
+     */
     public int getYSize() {
         return ySize;
     }
 
+    /**
+     * Getter of zSize
+     * @return zSize
+     */
     public int getZSize() {
         return zSize;
     }

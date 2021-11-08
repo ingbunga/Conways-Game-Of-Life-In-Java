@@ -2,6 +2,10 @@ package com.sungu.game_of_life.rbt;
 
 import java.util.TreeSet;
 
+/**
+ * Abstract Conway's game of life Board in 3D with Red Black Tree,
+ * no padding
+ */
 public class Board2D {
 
     private TreeSet<Cell2D> map, tempMap;
@@ -11,6 +15,12 @@ public class Board2D {
         tempMap = new TreeSet<>();
     }
 
+    /**
+     * Check is that coordinate has Cell
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @return has cell or not
+     */
     public boolean hasCell(int x, int y) {
         return map.contains(new Cell2D(x, y));
     }
@@ -38,8 +48,7 @@ public class Board2D {
 
         for(int j = y - 1; j <= y + 1; j++) {
             for (int i = x - 1; i <= x + 1; i++) {
-                if (j == y && i == x)
-                    continue;
+                if (j == y && i == x) continue;
 
                 cell.setPos(j, i);
                 if(map.contains(cell))
@@ -109,6 +118,11 @@ public class Board2D {
         }
     }
 
+
+    /**
+     * Import map as 2d boolean with start point (0, 0)
+     * @param loadingMap map
+     */
     public void loadMap(boolean[][] loadingMap) {
         loadMap(loadingMap, 0, 0);
     }
@@ -116,6 +130,8 @@ public class Board2D {
 
     /**
      * Export map as 2d boolean
+     * @param height export height
+     * @param width export width
      * @return 2d boolean map
      */
     public boolean[][] saveMap(int height, int width) {
